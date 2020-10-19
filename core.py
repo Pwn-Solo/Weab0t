@@ -79,7 +79,7 @@ async def on_message(ctx):
     elif 'anda' in ctx.content:
         emoji = '\N{EGG}'
         await ctx.add_reaction(emoji)
-    elif 'jabeli' in ctx.content:
+    elif 'egg' in ctx.content:
         emoji = '\N{EGG}'
         await ctx.add_reaction(emoji)
     await client.process_commands(ctx)
