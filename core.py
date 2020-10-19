@@ -3,6 +3,7 @@ from discord.ext import commands
 import random
 import praw
 
+
 TOKEN = "NzY3ODA5MDczMDg1MDIyMjgw.X43T7A.DO7Efb5uK-OjHbBRvcajweJoSmE"
 client = commands.Bot(command_prefix='.')
 
