@@ -9,7 +9,6 @@ import youtube_dl
 from async_timeout import timeout
 import praw
 
-<<<<<<< HEAD
 youtube_dl.utils.bug_reports_message = lambda: ''
 
 
@@ -478,11 +477,6 @@ class Music(commands.Cog):
 
 TOKEN="NzY3ODA5MDczMDg1MDIyMjgw.X43T7A.DO7Efb5uK-OjHbBRvcajweJoSmE"
 client = commands.Bot(command_prefix = '.')
-=======
-
-TOKEN = "NzY3ODA5MDczMDg1MDIyMjgw.X43T7A.DO7Efb5uK-OjHbBRvcajweJoSmE"
-client = commands.Bot(command_prefix='.')
->>>>>>> ff025d93d94f98e268343943549f04ce07b9a3c8
 
 client.remove_command('help')
 
