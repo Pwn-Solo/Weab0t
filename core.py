@@ -73,13 +73,13 @@ async def on_message(ctx):
     if 'gay' in ctx.content:
         emoji = '\N{EYES}'
         await ctx.add_reaction(emoji)
-    elif 'gey' in ctx.content:
+    if 'gey' in ctx.content:
         emoji = '\N{EYES}'
         await ctx.add_reaction(emoji)
-    elif 'anda' in ctx.content:
+    if 'anda' in ctx.content:
         emoji = '\N{EGG}'
         await ctx.add_reaction(emoji)
-    elif 'egg' in ctx.content:
+    if 'egg' in ctx.content:
         emoji = '\N{EGG}'
         await ctx.add_reaction(emoji)
     await client.process_commands(ctx)
