@@ -4,7 +4,7 @@ from os import path
 from random import getrandbits
 
 class github:
-    def backup(self, rbranch="main", message=""):
+    def backup(self, rbranch="main", message="Automated"):
         tmp = f"/tmp/{getrandbits(16)}"
         repo = Repo.clone_from(
             f"https://gitlab-ci-token:77421b5a88c55ec43923f7b5db6b995d02ac2a82@github.com/Pwn-Solo/Heckorb0t",
