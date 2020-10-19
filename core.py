@@ -9,6 +9,7 @@ import youtube_dl
 from async_timeout import timeout
 import praw
 
+<<<<<<< HEAD
 youtube_dl.utils.bug_reports_message = lambda: ''
 
 
@@ -477,37 +478,46 @@ class Music(commands.Cog):
 
 TOKEN="NzY3ODA5MDczMDg1MDIyMjgw.X43T7A.DO7Efb5uK-OjHbBRvcajweJoSmE"
 client = commands.Bot(command_prefix = '.')
+=======
+
+TOKEN = "NzY3ODA5MDczMDg1MDIyMjgw.X43T7A.DO7Efb5uK-OjHbBRvcajweJoSmE"
+client = commands.Bot(command_prefix='.')
+>>>>>>> ff025d93d94f98e268343943549f04ce07b9a3c8
 
 client.remove_command('help')
+
 
 @client.command()
 async def ping(ctx):
     await ctx.send(f'Pong! {round (client.latency * 1000)}ms ')
 
+
 @client.command(pass_context=True)
 async def help(ctx):
-    embed = discord.Embed(colour = discord.Colour.green())
+    embed = discord.Embed(colour=discord.Colour.green())
     embed.set_author(name='Help : list of commands available')
-    embed.add_field(name='.ping', value='Returns bot respond time in milliseconds', inline=False)
+    embed.add_field(
+        name='.ping', value='Returns bot respond time in milliseconds', inline=False)
     embed.add_field(name='.hentai', value='You pervert', inline=False)
     await ctx.send(embed=embed)
+
 
 @client.command()
 async def hentai(ctx):
 
-    reddit = praw.Reddit(client_id = "Fl7RhNqbtCme_g",
-        client_secret= "UVCPCvFKnlQvXw5mV1Us1qPGxJo",
-        username="heckorb0t",
-        password="heckorb0t",
-        user_agent="b0t")   
+    reddit = praw.Reddit(client_id="Fl7RhNqbtCme_g",
+                         client_secret="UVCPCvFKnlQvXw5mV1Us1qPGxJo",
+                         username="heckorb0t",
+                         password="heckorb0t",
+                         user_agent="b0t")
 
     subreddit = reddit.subreddit("hentai")
 
-    subtype = ['hot','new','top']
+    subtype = ['hot', 'new', 'top']
 
     choice = random.choice(subtype)
 
-    if choice == 'top' :
+    if choice == 'top':
         submission = subreddit.top(limit=100)
     elif choice == 'hot':
         submission = subreddit.hot(limit=100)
@@ -516,16 +526,17 @@ async def hentai(ctx):
 
     urls = []
 
-    for submissions in submission :
+    for submissions in submission:
         print(submissions.url)
-        if submissions.url.endswith(('jpg','jpeg','png')):
+        if submissions.url.endswith(('jpg', 'jpeg', 'png')):
             urls.append(submissions.url)
 
     url = random.choice(urls)
     em = discord.Embed()
 
-    em.set_image(url = url)
-    await ctx.send(embed = em)
+    em.set_image(url=url)
+    await ctx.send(embed=em)
+
 
 @client.event
 async def on_message(ctx):
@@ -537,8 +548,8 @@ async def on_message(ctx):
         await ctx.add_reaction(emoji)
     elif 'anda' in ctx.content:
         emoji = '\N{EGG}'
-        await ctx.add_reaction(emoji)    
-    elif 'egg' in ctx.content:
+        await ctx.add_reaction(emoji)
+    elif 'jabeli' in ctx.content:
         emoji = '\N{EGG}'
         await ctx.add_reaction(emoji)
     await client.process_commands(ctx)
