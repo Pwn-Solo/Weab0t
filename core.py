@@ -10,8 +10,7 @@ import youtube_dl
 from async_timeout import timeout
 import praw
 from music import *
-from animesearch import *
-from mangasearch import *
+from myanimelistdaily import *
 
 TOKEN="NzY3ODA5MDczMDg1MDIyMjgw.X43T7A.DO7Efb5uK-OjHbBRvcajweJoSmE"
 client = commands.Bot(command_prefix = '.')
@@ -81,16 +80,6 @@ async def hgif(ctx):
     em.set_image(url=url)
     await ctx.send(embed=em)
 
-@client.command(aliases=["ANIME"])
-async def anime(ctx, *, title):
-    embed = animeSearch(title)
-    await ctx.send(embed=embed)
-
-@client.command(aliases=["MANGA"])
-async def manga(ctx, *, title):
-    embed = mangaSearch(title)
-    await ctx.send(embed=embed)
-
 @client.event
 async def on_message(ctx):
     if 'gay' in ctx.content:
@@ -108,6 +97,24 @@ async def on_message(ctx):
     if client.user in ctx.mentions:
         await ctx.channel.send("Kya re bhadwe !?")
     await client.process_commands(ctx)
+    
+
+@client.command()
+async def anime(ctx):
+    try:
+        data=animeschedule()
+        embedlist=[]
+        for i in range(len(data)):
+            embed = discord.Embed(colour=discord.Colour.blue())
+            embed.set_author(name=data[i][0])
+            embed.set_image(url=data[i][1])
+            embed.add_field(name='Synopsis:', value=data[i][2], inline=False)
+            embedlist.append(embed)
+        print(embedlist)
+        await ctx.send(embeds=embedlist)
+
+    except:
+        pass
 
 client.add_cog(Music(client))
 
