@@ -10,6 +10,8 @@ import youtube_dl
 from async_timeout import timeout
 import praw
 from music import *
+from animesearch import *
+from mangasearch import *
 
 TOKEN="NzY3ODA5MDczMDg1MDIyMjgw.X43T7A.DO7Efb5uK-OjHbBRvcajweJoSmE"
 client = commands.Bot(command_prefix = '.')
@@ -78,6 +80,16 @@ async def hgif(ctx):
     em = discord.Embed()
     em.set_image(url=url)
     await ctx.send(embed=em)
+
+@client.command(aliases=["ANIME"])
+async def anime(ctx, *, title):
+    embed = animeSearch(title)
+    await ctx.send(embed=embed)
+
+@client.command(aliases=["MANGA"])
+async def manga(ctx, *, title):
+    embed = mangaSearch(title)
+    await ctx.send(embed=embed)
 
 @client.event
 async def on_message(ctx):
