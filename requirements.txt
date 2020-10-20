@@ -1,0 +1,15 @@
+asyncio
+functools
+itertools
+math
+random
+sqlite3
+youtube_dl
+async_timeout 
+praw
+discord 
+giphy_client
+pprint 
+requests
+bs4
+re
