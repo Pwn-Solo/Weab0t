@@ -9,7 +9,9 @@ async_timeout
 praw
 discord 
 giphy_client
+giphy_client
 pprint 
+myanimelistdaily 
 requests
 bs4
 re
