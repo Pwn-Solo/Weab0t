@@ -5,7 +5,7 @@ import math
 import random
 import discord
 import sqlite3
-from discord.ext import commands
+from discord.ext import commands,tasks
 import youtube_dl
 from async_timeout import timeout
 import praw
@@ -156,23 +156,29 @@ async def today(ctx):
     except Exception as e:
         print(e)
 
+time_day = 24*60*60
 
+@tasks.loop(seconds = time_day)
 async def time_check():
-    #client = discord.Client()
     await client.wait_until_ready()
     channel = client.get_channel(int(GENERAL_ID))
     print(channel)
-    #while not client.is_closed:
-    while True:
-        now = datetime.datetime.now()
-        if now.hour == 15 and now.minute == 45:
-            msg = 'hello'
-            print(msg)
-            await channel.send("@csgo Time bous")
-            await asyncio.sleep((60*60*24)-10)
+
+    now = datetime.datetime.now()
+    if now.hour == 15 and now.minute >= 30:
+        msg = 'hello'
+        print(msg)
+        await channel.send("@here CS:GO Time bous")
             
+@client.event
+async def on_ready():
+    time_check.start()
+    
+    activity = discord.Game(name = "Hentai ",type = 2)
+    await client.change_presence(status=discord.Status.idle, activity=activity)
+    print("Bot is ready!")
+
 
 client.add_cog(Music(client))
-client.loop.create_task(time_check())
-print("Bot is ready!")
+
 client.run(TOKEN)
