@@ -9,6 +9,7 @@ from discord.ext import commands
 import youtube_dl
 from async_timeout import timeout
 import praw
+import datetime
 from discord import Webhook, RequestsWebhookAdapter, File
 import giphy_client
 from giphy_client.rest import ApiException
@@ -17,6 +18,7 @@ from music import *
 from myanimelistdaily import *
 
 NSFW_ID=712204655517499403
+GENERAL_ID = 692648658210127956
 WEBHOOK_TOKEN="nSGe6wa1ILLNT93zmJQjcdYHFqqPgwHIWnmBipGEnEdUJSviAcgPouvOIZMp7RkXYCZx"
 WEBHOOK_ID=768040747395448862
 webhook = Webhook.partial(WEBHOOK_ID, WEBHOOK_TOKEN,adapter=RequestsWebhookAdapter())
@@ -154,7 +156,23 @@ async def today(ctx):
     except Exception as e:
         print(e)
 
-client.add_cog(Music(client))
 
+async def time_check():
+    #client = discord.Client()
+    await client.wait_until_ready()
+    channel = client.get_channel(int(GENERAL_ID))
+    print(channel)
+    #while not client.is_closed:
+    while True:
+        now = datetime.datetime.now()
+        if now.hour == 15 and now.minute == 45:
+            msg = 'hello'
+            print(msg)
+            await channel.send("@csgo Time bous")
+            await asyncio.sleep((60*60*24)-10)
+            
+
+client.add_cog(Music(client))
+client.loop.create_task(time_check())
 print("Bot is ready!")
 client.run(TOKEN)
