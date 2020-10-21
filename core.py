@@ -11,11 +11,12 @@ from async_timeout import timeout
 import praw
 import datetime
 from discord import Webhook, RequestsWebhookAdapter, File
-import giphy_client
-from giphy_client.rest import ApiException
+#import giphy_client
+#from giphy_client.rest import ApiException
 from pprint import pprint
 from music import *
 from myanimelistdaily import *
+from db_handler import eventmanager
 
 NSFW_ID=712204655517499403
 GENERAL_ID = 692648658210127956
@@ -35,8 +36,8 @@ client.remove_command('help')
 discord_token = TOKEN
 giphy_token = 'sCil6JxMoSLi7gPSyaUZ5n0cwvLtZ0Xb'
 
+"""
 api_instance = giphy_client.DefaultApi()
-
 def search_gifs(query):
     try:
         return api_instance.gifs_search_get(giphy_token, query, limit=5, rating = 'g')
@@ -55,7 +56,7 @@ def gif_response(emotion):
 async def gif(ctx, *args):
 
     await ctx.channel.send(gif_response(args))
-
+"""
 @client.command()
 async def ping(ctx):
     await ctx.send(f'Pong! {round (client.latency * 1000)}ms ')
@@ -142,7 +143,7 @@ async def on_message(ctx):
         await ctx.channel.send("Kya re bhadwe !?")
     await client.process_commands(ctx)
 
-time_day = 60
+time_day = 24*60*60
 
 @tasks.loop(seconds = time_day)
 async def time_check():
@@ -153,11 +154,32 @@ async def time_check():
     date=now.strftime("%d")
     if now.hour == 0 and now.minute == 0 and month=='10' and date=='12':
         await channel.send("@here Happy Ungli Diwas")
-    elif now.hour == 15 and now.minute == 25:
+
+@tasks.loop(seconds = time_day)
+async def csgo_check():
+    await client.wait_until_ready()
+    channel = client.get_channel(int(Announcement))
+    now = datetime.datetime.now()
+    if now.hour == 15 and now.minute == 25:
         await channel.send("@here CS:GO Time bous")
-    elif now.hour == 22 and now.minute == 0:
+
+@tasks.loop(seconds = time_day)
+async def stream_check():
+    await client.wait_until_ready()
+    channel = client.get_channel(int(Announcement))
+    now = datetime.datetime.now()
+    if now.hour == 22 and now.minute == 0:
         await channel.send("@here Stream/AmongUs Time bous")
-    elif now.hour == 0 and now.minute == 0:
+
+
+
+@tasks.loop(seconds = time_day)
+async def anime_check():
+    await client.wait_until_ready()
+    channel = client.get_channel(int(Announcement))
+    now = datetime.datetime.now()
+    print(now)
+    if now.hour == 0 and now.minute == 0:
         data=animeschedule()
         embedlist=[]
         for i in range(len(data)):
@@ -174,11 +196,16 @@ async def time_check():
 @client.event
 async def on_ready():
     time_check.start()
+    anime_check.start()
+    csgo_check.start()
+    stream_check.start()
     activity = discord.Game(name = "Hentai ",type = 2)
     await client.change_presence(status=discord.Status.idle, activity=activity)
     print("Bot is ready!")
 
 
+
 client.add_cog(Music(client))
+client.add_cog(eventmanager(client))
 
 client.run(TOKEN)
