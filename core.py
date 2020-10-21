@@ -120,16 +120,10 @@ async def hgif(ctx):
 
 @client.event
 async def on_message(ctx):
-    if 'gay' in ctx.content:
+    if 'gay' in ctx.content or 'gey' in ctx.content:
         emoji = '\N{EYES}'
         await ctx.add_reaction(emoji)
-    if 'gey' in ctx.content:
-        emoji = '\N{EYES}'
-        await ctx.add_reaction(emoji)
-    if 'anda' in ctx.content:
-        emoji = '\N{EGG}'
-        await ctx.add_reaction(emoji)
-    if 'egg' in ctx.content:
+    if 'anda' in ctx.content or 'egg' in ctx.content:
         emoji = '\N{EGG}'
         await ctx.add_reaction(emoji)
     if 'ded' in ctx.content:
@@ -146,11 +140,13 @@ async def today(ctx):
     try:
         data=animeschedule()
         embedlist=[]
-        for i in range(10):
+        for i in range(len(data)):
             embed = discord.Embed(colour=discord.Colour.blue())
             embed.set_author(name=data[i][0])
             embed.set_image(url=data[i][1])
             embedlist.append(embed)
+            if i==10:
+                break
         webhook.send(embeds=embedlist)
         await ctx.send("Enjoy ;)")
     except Exception as e:

@@ -2,7 +2,11 @@ import requests
 from bs4 import BeautifulSoup
 from bs4 import NavigableString
 import re
+from datetime import date
 
+todays = date.today().weekday()
+weekday=['monday','tuesday','wednesday','thursday','friday','saturday','sunday']
+day=weekday[todays]
 
 def animeschedule():
     ret=[]
@@ -10,23 +14,31 @@ def animeschedule():
     page = requests.get(URL)
 
     soup = BeautifulSoup(page.content, 'html.parser')
-
-    results = soup.find(class_='seasonal-anime-list js-seasonal-anime-list js-seasonal-anime-list-key-monday clearfix')
-
+    
+    classname='seasonal-anime-list js-seasonal-anime-list js-seasonal-anime-list-key-'+day+' clearfix'
+    results = soup.find(class_=classname)
+    
     for results in results:
         data=[]
         if isinstance(results,NavigableString):
             continue
         animename=results.find('h2', class_='h2_anime_title')
-        synopsis=results.find('div', class_='synopsis js-synopsis')
-        images=results.find('img', {'src':re.compile('.jpg')})
-        if None in (animename,images,synopsis):
+        classs=results.find('div', class_='image')
+        if None in (animename,classs):
             continue
-        data.append(animename.text)
-        data.append(images['src'])
-        data.append(synopsis.text)
+        if day=='monday':
+            images=classs.find('img', {'src':re.compile('.jpg')})
+            print(images['src'])
+            data.append(animename.text)
+            data.append(images['src'])
+        else:
+            images=classs.find('img', {'data-src':re.compile('.jpg')})
+            print(images['data-src'])
+            data.append(animename.text)
+            data.append(images['data-src'])
         ret.append(data)
     return ret
+
 
 
 
