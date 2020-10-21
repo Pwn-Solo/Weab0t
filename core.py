@@ -142,25 +142,22 @@ async def on_message(ctx):
         await ctx.channel.send("Kya re bhadwe !?")
     await client.process_commands(ctx)
 
-time_day = 24*60*60
+time_day = 60
 
 @tasks.loop(seconds = time_day)
 async def time_check():
     await client.wait_until_ready()
     channel = client.get_channel(int(Announcement))
-
     now = datetime.datetime.now()
-    if now.hour == 15 and now.minute >= 25:
+    month=now.strftime("%m")
+    date=now.strftime("%d")
+    if now.hour == 0 and now.minute == 0 and month=='10' and date=='12':
+        await channel.send("@here Happy Ungli Diwas")
+    elif now.hour == 15 and now.minute == 25:
         await channel.send("@here CS:GO Time bous")
-
-time_day = 24*60*60
-
-@tasks.loop(seconds = time_day)
-async def anime_check():
-    await client.wait_until_ready()
-    channel = client.get_channel(int(Announcement))
-    now = datetime.datetime.now()
-    if now.hour == 00 and now.minute >= 00:
+    elif now.hour == 22 and now.minute == 0:
+        await channel.send("@here Stream/AmongUs Time bous")
+    elif now.hour == 0 and now.minute == 0:
         data=animeschedule()
         embedlist=[]
         for i in range(len(data)):
@@ -171,12 +168,12 @@ async def anime_check():
             if i==10:
                 break
         webhook.send(embeds=embedlist)
-        await channel.send("@here Enjoy ;)")          
+        await channel.send("@here Enjoy ;)")    
+              
 
 @client.event
 async def on_ready():
     time_check.start()
-    anime_check.start()
     activity = discord.Game(name = "Hentai ",type = 2)
     await client.change_presence(status=discord.Status.idle, activity=activity)
     print("Bot is ready!")
