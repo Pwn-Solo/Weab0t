@@ -51,11 +51,9 @@ def gif_response(emotion):
     return gif[0].url
 
 @client.command()
-<<<<<<< HEAD
-async def gif(ctx,*args):
-=======
+
 async def gif(ctx, *args):
->>>>>>> a7735b1851f1202978829fc6d62e31297ab8e724
+
     await ctx.channel.send(gif_response(args))
 
 @client.command()
