@@ -3,8 +3,9 @@ import sqlite3
 import time
 import datetime
 from datetime import date
-from discord.ext import commands
+from discord.ext import commands,tasks
 import asyncio
+import discord
 
 class DB_MANAGER():
     def __init__(self):
@@ -50,7 +51,7 @@ class DB_MANAGER():
         if stat == "time":
             try:
                 sql_Command = """
-                UPDATE events SET time = (?) where eventname =(?) 
+                UPDATE events SET date = (?) where eventname =(?) 
                 """
                 self.crsr.execute(sql_Command,(modifiedVal,ofEvent,))
                 self.db_connection.commit()
@@ -64,7 +65,7 @@ class DB_MANAGER():
                 """
                 self.crsr.execute(sql_Command,(modifiedVal,ofEvent,))
                 self.db_connection.commit()
-                return "Entry modified " + stat +"with " + modifiedVal + "for " + ofEvent
+                return "Entry modified " + stat +" with " + modifiedVal + "for " + ofEvent
             except Exception as e:
                 return e
 
@@ -83,12 +84,52 @@ class DB_MANAGER():
 class eventmanager(commands.Cog):
     def __init__(self, client):
         self.client = client
+        self.db = DB_MANAGER()
     
     @commands.group()
     async def event(self, ctx):
-        self.db = DB_MANAGER()
+        pass
+    
+    @event.command(pass_context = True)
+    async def help(self,ctx):
+        ctx.send(embed = discord.Embed(
+            name = "!! HELP !!"
+            description = """
+            EVENTS LOG
+            add - .event add "<eventname>" "<date(%d - %m - %y)>"
+            show - .event show
+            delete - .event delete "<eventname>"
+            modify - .event <time/eventname> "<to_chng_value>" "<eventname>"
+            """ 
+        ))
 
-    @event.commands(pass_context=True)
+    @event.command(pass_context=True)
     async def add(self,ctx,eventname,date):
         status = self.db.addEntry(eventname,date)
+        await ctx.send(status)
+
+    @event.command(pass_context=True)
+    async def show(self,ctx):
+        embeds = []
+        status = self.db.showall()
+        for details in status:
+            embed = discord.Embed(
+                title="Events",
+                description= '```  ```',
+                colour=0x4262F4,
+            )
+            embed.add_field(name="Event", value='```' + details[0] + '```', inline=True)
+            embed.add_field(name="Date", value='```' + details[1] + '```', inline=True)
+            embeds.append(embed)
+        for embed in embeds:
+            await ctx.send(embed = embed)
+
+    @event.command(pass_context=True)
+    async def delete(self,ctx,eventname):
+        status = self.db.removeEntry(eventname)
+        await ctx.send(status)
+
+    @event.command(pass_context=True)
+    async def modify(self,ctx,stat,modified,modify):
+        status = self.db.moddifyEntry(stat,modified,modify)
         await ctx.send(status)
