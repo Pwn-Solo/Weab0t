@@ -19,8 +19,9 @@ from myanimelistdaily import *
 
 NSFW_ID=712204655517499403
 GENERAL_ID = 692648658210127956
-WEBHOOK_TOKEN="WORplDciBiGfANDY8KGGVhaRhFyInqUuShicXmOJvLxv44V0zj2Y2T_ovlkepiEmgzwu"
-WEBHOOK_ID=768368082938232832
+WEBHOOK_TOKEN="BGrajX2DkzfexjfXN3WbTtuf--MdkSyYOGHyHyngRkfmpS6f4YPadOC3kPiEbGK3a-dS"
+WEBHOOK_ID=768470281286451200
+Announcement=768467811521134632
 webhook = Webhook.partial(WEBHOOK_ID, WEBHOOK_TOKEN,adapter=RequestsWebhookAdapter())
 TOKEN="NzY3ODA5MDczMDg1MDIyMjgw.X43T7A.DO7Efb5uK-OjHbBRvcajweJoSmE"
 client = commands.Bot(command_prefix = '.')
@@ -50,7 +51,11 @@ def gif_response(emotion):
     return gif[0].url
 
 @client.command()
+<<<<<<< HEAD
 async def gif(ctx,*args):
+=======
+async def gif(ctx, *args):
+>>>>>>> a7735b1851f1202978829fc6d62e31297ab8e724
     await ctx.channel.send(gif_response(args))
 
 @client.command()
@@ -61,9 +66,14 @@ async def ping(ctx):
 async def help(ctx):
     embed = discord.Embed(colour=discord.Colour.green())
     embed.set_author(name='Help : list of commands available')
-    embed.add_field(
-        name='.ping', value='Returns bot respond time in milliseconds', inline=False)
-    embed.add_field(name='.hentai', value='You pervert', inline=False)
+    embed.add_field(name='.ping', value='Returns bot respond time in milliseconds', inline=False)
+    embed.add_field(name='.hpic', value='hentai pics', inline=False)
+    embed.add_field(name='.hgif', value='hentai gifs', inline=False)
+    embed.add_field(name='.gif arg', value='sends agif basedon your arg', inline=False)
+    embed.add_field(name='.p song', value='play song', inline=False)
+    embed.add_field(name='.dc', value='disconnect', inline=False)
+    embed.add_field(name='.s', value='skip', inline=False)
+    embed.add_field(name='.queue', value='queue', inline=False)
     await ctx.send(embed=embed)
 
 @client.command()
@@ -133,10 +143,26 @@ async def on_message(ctx):
     if client.user in ctx.mentions:
         await ctx.channel.send("Kya re bhadwe !?")
     await client.process_commands(ctx)
-    
-@client.command()
-async def today(ctx):
-    try:
+
+time_day = 24*60*60
+
+@tasks.loop(seconds = time_day)
+async def time_check():
+    await client.wait_until_ready()
+    channel = client.get_channel(int(Announcement))
+
+    now = datetime.datetime.now()
+    if now.hour == 15 and now.minute >= 25:
+        await channel.send("@here CS:GO Time bous")
+
+time_day = 24*60*60
+
+@tasks.loop(seconds = time_day)
+async def anime_check():
+    await client.wait_until_ready()
+    channel = client.get_channel(int(Announcement))
+    now = datetime.datetime.now()
+    if now.hour == 00 and now.minute >= 00:
         data=animeschedule()
         embedlist=[]
         for i in range(len(data)):
@@ -147,40 +173,12 @@ async def today(ctx):
             if i==10:
                 break
         webhook.send(embeds=embedlist)
-        await ctx.send("Enjoy ;)")
-    except Exception as e:
-        print(e)
-
-time_day = 24*60*60
-
-@tasks.loop(seconds = time_day)
-async def time_check():
-    await client.wait_until_ready()
-    channel = client.get_channel(int(GENERAL_ID))
-    print(channel)
-
-    now = datetime.datetime.now()
-    if now.hour == 15 and now.minute >= 15:
-        msg = 'hello'
-        print(msg)
-        await channel.send("@here CS:GO Time bous")
-
-"""
-time_day = 24*60*60
-
-@tasks.loop(seconds = time_day)
-async def anime_check():
-    await client.wait_until_ready()
-    channel = client.get_channel(int(GENERAL_ID))
-    now = datetime.datetime.now()
-    if now.hour == 12 and now.minute >= 33:
-        today()          
-"""
+        await channel.send("@here Enjoy ;)")          
 
 @client.event
 async def on_ready():
     time_check.start()
-    #anime_check.start()
+    anime_check.start()
     activity = discord.Game(name = "Hentai ",type = 2)
     await client.change_presence(status=discord.Status.idle, activity=activity)
     print("Bot is ready!")
