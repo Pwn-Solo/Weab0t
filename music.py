@@ -338,7 +338,7 @@ class Music(commands.Cog):
                  .set_footer(text='Viewing page {}/{}'.format(page, pages)))
         await ctx.send(embed=embed)
 
-    @commands.command(name='p')
+    @commands.command(name='p',pass_context=True)
     async def _play(self, ctx: commands.Context, *, search: str):
         
         if not ctx.voice_state.voice:

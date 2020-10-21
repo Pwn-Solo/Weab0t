@@ -50,8 +50,8 @@ def gif_response(emotion):
     return gif[0].url
 
 @client.command()
-async def gif(ctx,arg):
-    await ctx.channel.send(gif_response(arg))
+async def gif(ctx,*args):
+    await ctx.channel.send(gif_response(args))
 
 @client.command()
 async def ping(ctx):
@@ -160,7 +160,7 @@ async def time_check():
     print(channel)
 
     now = datetime.datetime.now()
-    if now.hour == 15 and now.minute >= 30:
+    if now.hour == 15 and now.minute >= 15:
         msg = 'hello'
         print(msg)
         await channel.send("@here CS:GO Time bous")
