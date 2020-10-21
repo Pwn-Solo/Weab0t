@@ -93,14 +93,15 @@ class eventmanager(commands.Cog):
     @event.command(pass_context = True)
     async def help(self,ctx):
         ctx.send(embed = discord.Embed(
-            name = "!! HELP !!"
+            name = "!! HELP !!",
             description = """
             EVENTS LOG
             add - .event add "<eventname>" "<date(%d - %m - %y)>"
             show - .event show
             delete - .event delete "<eventname>"
             modify - .event <time/eventname> "<to_chng_value>" "<eventname>"
-            """ 
+            """,
+            colour = 0x4262F4
         ))
 
     @event.command(pass_context=True)
