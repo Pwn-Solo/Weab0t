@@ -146,16 +146,6 @@ async def on_message(ctx):
 time_day = 24*60*60
 
 @tasks.loop(seconds = time_day)
-async def time_check():
-    await client.wait_until_ready()
-    channel = client.get_channel(int(Announcement))
-    now = datetime.datetime.now()
-    month=now.strftime("%m")
-    date=now.strftime("%d")
-    if now.hour == 0 and now.minute == 0 and month=='10' and date=='12':
-        await channel.send("@here Happy Ungli Diwas")
-
-@tasks.loop(seconds = time_day)
 async def csgo_check():
     await client.wait_until_ready()
     channel = client.get_channel(int(Announcement))
