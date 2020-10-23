@@ -17,6 +17,7 @@ from pprint import pprint
 from music import *
 from myanimelistdaily import *
 from db_handler import eventmanager
+import pytz
 
 NSFW_ID=712204655517499403
 GENERAL_ID = 692648658210127956
@@ -35,6 +36,7 @@ client.remove_command('help')
 
 discord_token = TOKEN
 giphy_token = 'sCil6JxMoSLi7gPSyaUZ5n0cwvLtZ0Xb'
+IST = pytz.timezone('Asia/Kolkata')
 
 """
 api_instance = giphy_client.DefaultApi()
@@ -74,6 +76,7 @@ async def help(ctx):
     embed.add_field(name='.s', value='skip', inline=False)
     embed.add_field(name='.queue', value='queue', inline=False)
     await ctx.send(embed=embed)
+
 
 @client.command()
 async def hpic(ctx):
@@ -129,47 +132,50 @@ async def hgif(ctx):
 
 @client.event
 async def on_message(ctx):
-    if 'gay' in ctx.content or 'gey' in ctx.content:
+    gaali=['bc','mc','bhenchod','madarchod']
+    text=ctx.content.split(' ')
+    for i in range(len(text)):
+        if text[i].lower() in gaali:
+            await ctx.channel.send(f"{ctx.author.mention} Yeh kya bencho macho lagaa ke rakha hai")
+            break
+    if 'gay' in ctx.content.lower() or 'gey' in ctx.content.lower():
         emoji = '\N{EYES}'
         await ctx.add_reaction(emoji)
-    if 'anda' in ctx.content or 'egg' in ctx.content:
+    if 'anda' in ctx.content.lower() or 'egg' in ctx.content.lower():
         emoji = '\N{EGG}'
         await ctx.add_reaction(emoji)
-    if 'ded' in ctx.content:
+    if 'ded' in ctx.content.lower():
         await ctx.channel.send("Omae Wa Mou Shinderu!")
-    if 'nani' in ctx.content:
+    if 'nani' in ctx.content.lower():
         await ctx.channel.send("Ora! Ora! Ora!")
     if client.user in ctx.mentions:
         await ctx.channel.send("Kya re bhadwe !?")
     await client.process_commands(ctx)
 
-time_day = 24*60*60
+time_day = 1
 
 @tasks.loop(seconds = time_day)
 async def csgo_check():
     await client.wait_until_ready()
     channel = client.get_channel(int(Announcement))
-    now = datetime.datetime.now()
-    if now.hour == 15 and now.minute == 25:
+    now = datetime.datetime.now(IST)
+    if now.hour == 15 and now.minute == 35 and now.second == 1:
         await channel.send("@here CS:GO Time bous")
 
 @tasks.loop(seconds = time_day)
 async def stream_check():
     await client.wait_until_ready()
     channel = client.get_channel(int(Announcement))
-    now = datetime.datetime.now()
-    if now.hour == 22 and now.minute == 0:
+    now = datetime.datetime.now(IST)
+    if now.hour == 22 and now.minute == 0 and now.second == 1:
         await channel.send("@here Stream/AmongUs Time bous")
-
-
 
 @tasks.loop(seconds = time_day)
 async def anime_check():
     await client.wait_until_ready()
     channel = client.get_channel(int(Announcement))
-    now = datetime.datetime.now()
-    print(now)
-    if now.hour == 0 and now.minute == 0:
+    now = datetime.datetime.now(IST)
+    if now.hour == 0 and now.minute == 0 and now.second == 1:
         data=animeschedule()
         embedlist=[]
         for i in range(len(data)):
@@ -177,7 +183,7 @@ async def anime_check():
             embed.set_author(name=data[i][0])
             embed.set_image(url=data[i][1])
             embedlist.append(embed)
-            if i==10:
+            if i==9:
                 break
         webhook.send(embeds=embedlist)
         await channel.send("@here Enjoy ;)")    
@@ -185,7 +191,6 @@ async def anime_check():
 
 @client.event
 async def on_ready():
-    time_check.start()
     anime_check.start()
     csgo_check.start()
     stream_check.start()

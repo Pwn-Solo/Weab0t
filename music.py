@@ -8,6 +8,9 @@ from discord.ext import commands
 import youtube_dl
 from async_timeout import timeout
 import praw
+import urllib.request
+import re
+
 
 youtube_dl.utils.bug_reports_message = lambda: ''
 
@@ -343,6 +346,11 @@ class Music(commands.Cog):
         
         if not ctx.voice_state.voice:
             await ctx.invoke(self._join)
+        
+        search_keyword=search.replace(' ','_')
+        html = urllib.request.urlopen("https://www.youtube.com/results?search_query=" + search_keyword)
+        video_ids = re.findall(r"watch\?v=(\S{11})", html.read().decode())
+        search="https://www.youtube.com/watch?v=" + video_ids[0]
 
         async with ctx.typing():
             try:

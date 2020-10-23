@@ -6,7 +6,7 @@ from datetime import date
 
 todays = date.today().weekday()
 weekday=['monday','tuesday','wednesday','thursday','friday','saturday','sunday']
-day=weekday[todays]
+day=weekday[todays+1]
 
 def animeschedule():
     ret=[]
@@ -17,7 +17,7 @@ def animeschedule():
     
     classname='seasonal-anime-list js-seasonal-anime-list js-seasonal-anime-list-key-'+day+' clearfix'
     results = soup.find(class_=classname)
-    
+    print(day)
     for results in results:
         data=[]
         if isinstance(results,NavigableString):
@@ -26,6 +26,7 @@ def animeschedule():
         classs=results.find('div', class_='image')
         if None in (animename,classs):
             continue
+        
         if day=='monday':
             images=classs.find('img', {'src':re.compile('.jpg')})
             print(images['src'])
