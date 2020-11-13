@@ -6,7 +6,7 @@ from datetime import date
 
 todays = date.today().weekday()
 weekday=['monday','tuesday','wednesday','thursday','friday','saturday','sunday']
-day=weekday[todays+1]
+day=weekday[(todays+1)%6]
 
 def animeschedule():
     ret=[]

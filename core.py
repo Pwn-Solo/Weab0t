@@ -144,6 +144,24 @@ async def on_message(ctx):
     if 'anda' in ctx.content.lower() or 'egg' in ctx.content.lower():
         emoji = '\N{EGG}'
         await ctx.add_reaction(emoji)
+    if 'puss' in ctx.content.lower():
+        emoji = '<:pussikess:744121068125683724>'
+        await ctx.add_reaction(emoji)
+    if 'gaanja' in ctx.content.lower() or 'drug' in ctx.content.lower():
+        emoji='<:oniket:744127122410307584>'
+        await ctx.add_reaction(emoji)
+    if 'simp' in ctx.content.lower() and ':' not in ctx.content.lower() or 's1mp' in ctx.content.lower() and ':' not in ctx.content.lower():
+        emoji = '<a:simp:766712756279312435>'
+        await ctx.channel.send(emoji)
+    if 'penis' in ctx.content.lower() and ':' not in ctx.content.lower()  or 'hila' in ctx.content.lower() and ':' not in ctx.content.lower()  or 'cum' in ctx.content.lower() and ':' not in ctx.content.lower() or 'lauda' in ctx.content.lower() and ':' not in ctx.content.lower() or 'masturbate' in ctx.content.lower() and ':' not in ctx.content.lower():
+        emoji = '<a:egg_plant:772891864533434389>'
+        await ctx.channel.send(emoji)
+    if 'sheep' in ctx.content.lower() and ':' not in ctx.content.lower()  or 'party' in ctx.content.lower() and ':' not in ctx.content.lower():
+        emoji = ' <a:rainbow_sheep:772891998326751253>'
+        await ctx.channel.send(emoji)
+    if 'epic' in ctx.content.lower() and ':' not in ctx.content.lower() or 'maal' in ctx.content.lower() and ':' not in ctx.content.lower() or 'mast' in ctx.content.lower() and ':' not in ctx.content.lower():
+        emoji = '<a:epic:772892133345853442>'
+        await ctx.channel.send(emoji)
     if 'ded' in ctx.content.lower():
         await ctx.channel.send("Omae Wa Mou Shinderu!")
     if 'nani' in ctx.content.lower():
@@ -161,6 +179,7 @@ async def csgo_check():
     now = datetime.datetime.now(IST)
     if now.hour == 15 and now.minute == 35 and now.second == 1:
         await channel.send("@here CS:GO Time bous")
+
 
 @tasks.loop(seconds = time_day)
 async def stream_check():
