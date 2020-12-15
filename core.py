@@ -25,7 +25,7 @@ WEBHOOK_TOKEN="BGrajX2DkzfexjfXN3WbTtuf--MdkSyYOGHyHyngRkfmpS6f4YPadOC3kPiEbGK3a
 WEBHOOK_ID=768470281286451200
 Announcement=768467811521134632
 webhook = Webhook.partial(WEBHOOK_ID, WEBHOOK_TOKEN,adapter=RequestsWebhookAdapter())
-TOKEN="NzY3ODA5MDczMDg1MDIyMjgw.X43T7A.DO7Efb5uK-OjHbBRvcajweJoSmE"
+TOKEN="INSERT TOKEN BRUH"
 client = commands.Bot(command_prefix = '.')
 reddit = praw.Reddit(client_id="Fl7RhNqbtCme_g",
     client_secret="UVCPCvFKnlQvXw5mV1Us1qPGxJo",
