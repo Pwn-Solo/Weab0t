@@ -1,4 +1,4 @@
-# Hentai BOT
+<h1> Hentai BOT 🤖 </h1>
 
 ![display pic](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyO8peOoAOaTc9CvNjIPNzlYDPbywcQ7EwOA&usqp=CAU)
 
