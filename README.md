@@ -2,7 +2,7 @@
 
 ![display pic](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyO8peOoAOaTc9CvNjIPNzlYDPbywcQ7EwOA&usqp=CAU)
 
-!! 18+ Adult Content Alert !!
+> :warning: Adult Content Alert 🔞 
 
 This is a friendly discord bot suitable for anime/hentai lovers. A must have for friendly server.
 
