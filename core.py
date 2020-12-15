@@ -21,21 +21,21 @@ import pytz
 
 NSFW_ID=712204655517499403
 GENERAL_ID = 692648658210127956
-WEBHOOK_TOKEN="BGrajX2DkzfexjfXN3WbTtuf--MdkSyYOGHyHyngRkfmpS6f4YPadOC3kPiEbGK3a-dS"
+WEBHOOK_TOKEN=""
 WEBHOOK_ID=768470281286451200
 Announcement=768467811521134632
 webhook = Webhook.partial(WEBHOOK_ID, WEBHOOK_TOKEN,adapter=RequestsWebhookAdapter())
 TOKEN="INSERT TOKEN BRUH"
 client = commands.Bot(command_prefix = '.')
-reddit = praw.Reddit(client_id="Fl7RhNqbtCme_g",
-    client_secret="UVCPCvFKnlQvXw5mV1Us1qPGxJo",
+reddit = praw.Reddit(client_id="",
+    client_secret="",
     username="heckorb0t",
     password="heckorb0t",
     user_agent="b0t")
 client.remove_command('help')
 
 discord_token = TOKEN
-giphy_token = 'sCil6JxMoSLi7gPSyaUZ5n0cwvLtZ0Xb'
+giphy_token = ''
 IST = pytz.timezone('Asia/Kolkata')
 
 """
