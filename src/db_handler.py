@@ -10,7 +10,7 @@ from datetime import date , datetime
 import pytz
 
 IST = pytz.timezone('Asia/Kolkata')
-Announcement=768467811521134632
+Announcement="[ACCOUNCEMENT CHANNEL ID]"
 
 class DB_MANAGER():
     def __init__(self):
@@ -96,9 +96,6 @@ class DB_MANAGER():
                     return self.crsr.execute(sql_Command,(date[0],)).fetchall()
         except Exception as e:
             return e
-
-# db = DB_MANAGER()
-# db.addEntry("ungli diwas",'2020-11-21')
 
 class eventmanager(commands.Cog):
     def __init__(self, client):

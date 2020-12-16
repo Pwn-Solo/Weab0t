@@ -19,23 +19,23 @@ from myanimelistdaily import *
 from db_handler import eventmanager
 import pytz
 
-NSFW_ID=712204655517499403
-GENERAL_ID = 692648658210127956
-WEBHOOK_TOKEN=""
-WEBHOOK_ID=768470281286451200
-Announcement=768467811521134632
+NSFW_ID="[NSFW CHANNEL ID]"
+GENERAL_ID = "[GENERAL CHANNEL ID]"
+WEBHOOK_TOKEN="[INSERT YOUR WEB TOKEN BRUH]"
+WEBHOOK_ID="[WEB HOOK ID]"
+Announcement="[ANNOUNCEMENT CHANNEL ID]"
 webhook = Webhook.partial(WEBHOOK_ID, WEBHOOK_TOKEN,adapter=RequestsWebhookAdapter())
 TOKEN="INSERT TOKEN BRUH"
 client = commands.Bot(command_prefix = '.')
-reddit = praw.Reddit(client_id="",
-    client_secret="",
-    username="heckorb0t",
-    password="heckorb0t",
+reddit = praw.Reddit(client_id="[CLIENT ID]",
+    client_secret="[CLIENT SECRET]",
+    username="[BOT ACCOUNT USERNAME]",
+    password="[BOT ACCOUNT PASSWORD]",
     user_agent="b0t")
 client.remove_command('help')
 
 discord_token = TOKEN
-giphy_token = ''
+giphy_token = '[GIPHY TOKEN]'
 IST = pytz.timezone('Asia/Kolkata')
 
 """
@@ -59,6 +59,7 @@ async def gif(ctx, *args):
 
     await ctx.channel.send(gif_response(args))
 """
+
 @client.command()
 async def ping(ctx):
     await ctx.send(f'Pong! {round (client.latency * 1000)}ms ')

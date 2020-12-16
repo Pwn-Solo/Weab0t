@@ -8,6 +8,8 @@ todays = date.today().weekday()
 weekday=['monday','tuesday','wednesday','thursday','friday','saturday','sunday']
 day=weekday[(todays+1)%6]
 
+
+# anime list API
 def animeschedule():
     ret=[]
     URL = 'https://myanimelist.net/anime/season/schedule'
