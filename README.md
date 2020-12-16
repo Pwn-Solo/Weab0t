@@ -56,5 +56,5 @@
 ```
 - [+] Add some more functionalities (open to suggestions)
 - [+] Make the code more efficient.
-- [+] Make the deployment more strcutured
+- [+] Make the deployment more structured
 ```
