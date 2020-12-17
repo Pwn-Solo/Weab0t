@@ -8,7 +8,7 @@
 ⚠️ Adult Content Alert 🔞
 ```
 
-``` This is a friendly discord bot suitable for anime/hentai 💛 lovers . A must have for friendly server.```
+``` The Only bot you'd ever need ```
 
 ## Functionalities
 
