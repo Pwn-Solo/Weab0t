@@ -1,5 +1,5 @@
-<h1> Discord BOT 🤖 </h1>
-
+# WeaBOT 🤖
+### A tiny discord bot written in python by weebs for weebs :P
 <p align="center">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyO8peOoAOaTc9CvNjIPNzlYDPbywcQ7EwOA&usqp=CAU" alt="anime" align=center>
 </p>
