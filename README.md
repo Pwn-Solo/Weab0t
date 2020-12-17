@@ -5,7 +5,7 @@ A tiny and simple discord bot written in python by weebs for weebs :P
 </p>
 
 ```js
-⚠️ Adult Content Alert 🔞
+⚠️ NSFW Alert 🔞
 ```
 
 ``` The Only bot you'd ever need ```
